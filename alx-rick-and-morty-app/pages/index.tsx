@@ -1,19 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import PropertyCard from "../components/property/PropertyCard";
-
-interface Property {
-  id: string | number;
-  image: string;
-  title: string;
-  location: string;
-  price: number;
-  [key: string]: any;
-}
+import PropertyCard from "@/components/property/PropertyCard";
+import { Property } from "@/types/Property";
 
 export default function Home() {
   const [properties, setProperties] = useState<Property[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -30,9 +22,7 @@ export default function Home() {
     fetchProperties();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="grid grid-cols-3 gap-4">
@@ -42,3 +32,4 @@ export default function Home() {
     </div>
   );
 }
+
